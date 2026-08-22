@@ -73,6 +73,7 @@ public class frmSplash extends javax.swing.JFrame implements Runnable{
     
     public static void main(String[]args){
         new Thread (new frmSplash()).start();
+        System.out.println("asdasd");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
