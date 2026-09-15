@@ -15,7 +15,7 @@ public class Admin extends Usuario {
         super(ci, nombre, contrasena);
         this.cargo=cargo;
     }
-
+//xd
     public String getCargo() {
         return cargo;
     }
