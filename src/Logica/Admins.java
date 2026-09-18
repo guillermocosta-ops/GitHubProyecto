@@ -3,7 +3,7 @@ package Logica;
 import java.util.ArrayList;
 import java.util.List;
 public class Admins {
-       private final List<Admin> listaAdmins;
+       private  List<Admin> listaAdmins;
 
     public Admins() {
         listaAdmins = new ArrayList<>();

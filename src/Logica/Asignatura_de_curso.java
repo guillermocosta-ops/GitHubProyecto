@@ -7,8 +7,8 @@ import java.util.List;
 public class Asignatura_de_curso {
     private Asignatura asignatura;
     private Docente docente;
-    private final List<Estudiante> listaEstudiantes;
-    private final Notas notas;
+    private  List<Estudiante> listaEstudiantes;
+    private  Notas notas;
     private String estado; 
 
     public Asignatura_de_curso(Asignatura asignatura, Docente docente, List<Estudiante> listaEstudiantes, Notas notas, String estado) {

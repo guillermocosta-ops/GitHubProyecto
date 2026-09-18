@@ -4,11 +4,11 @@
  */
 package Logica;
 
+import java.util.ArrayList;
 import java.util.List;
 
-
 public class Notas {
-     private final List<Nota> listaNota;
+     private  List<Nota> listaNota;
 
     public Notas(List<Nota> listaNota) {
         this.listaNota = listaNota;

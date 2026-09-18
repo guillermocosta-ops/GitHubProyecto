@@ -4,10 +4,19 @@
  */
 package Logica;
 
-/**
- *
- * @author guill
- */
+import java.util.ArrayList;
+import java.util.List;
 public class Estudiantes {
-    
+    private List<Estudiante>listaEstudiantes;
+
+    public Estudiantes(List<Estudiante> listaEstudiantes) {
+        this.listaEstudiantes = listaEstudiantes;
+    }
+     public void agregarEstudiante(Estudiante estudiante) {
+        listaEstudiantes.add(estudiante);
+    }
+
+    public void eliminarEstudiante(Estudiante estudiante) {
+        listaEstudiantes.remove(estudiante);
+    }
 }

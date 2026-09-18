@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Grupos {
-    private final List<Grupo> listaGrupos;
+    private  List<Grupo> listaGrupos;
 
     public Grupos() {
         listaGrupos = new ArrayList<>();

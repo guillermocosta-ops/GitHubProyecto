@@ -1,13 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Logica;
 
-/**
- *
- * @author guill
- */
+
 public class Grupo {
+    private int id;
+    private Asignaturas_de_cursos asisg; 
+
+    public Grupo(int id, Asignaturas_de_cursos asisg) {
+        this.id = id;
+        this.asisg = asisg;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Asignaturas_de_cursos getAsisg() {
+        return asisg;
+    }
+
+    public void setAsisg(Asignaturas_de_cursos asisg) {
+        this.asisg = asisg;
+    }
     
 }
