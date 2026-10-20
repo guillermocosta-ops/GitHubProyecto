@@ -4,8 +4,10 @@
  */
 package InterfazGrafica;
 
+import Logica.Nota;
 import Persistencia.Persistencia;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -74,19 +76,18 @@ private void seleccionarNotaParaModificar() {
         try {
             Persistencia p = new Persistencia();
 
-            ArrayList<Map<String, Object>> notas =
-                    p.buscarCalificaciones(cedula);
+            List<Nota> lista = p.buscarCalificaciones(cedula);
 
-            for (Map<String, Object> registro : notas) {
+            for (Nota registro: lista) {
 
                 Object[] fila = {
-                    registro.get("idNota"),
-                    registro.get("cedula"),
-                    registro.get("nombre"),
-                    registro.get("asignatura"),
-                    registro.get("tipo"),
-                    registro.get("nota"),
-                    registro.get("fecha")
+                    0,
+                    registro.getCi(),
+                    "",
+                    "",
+                    registro.getTipo(),
+                    registro.getNota(),
+                    registro.getFecha()
                 };
 
                 modelo.addRow(fila);

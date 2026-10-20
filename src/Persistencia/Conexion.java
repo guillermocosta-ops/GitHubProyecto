@@ -15,11 +15,14 @@ public class Conexion {
     private String nomBaseDatos;
     
     private Conexion(){
-        nomBaseDatos = "pruebas";
+        nomBaseDatos = "bd_prueba";
         driver = "org.mariadb.jdbc.Driver";
-        url = "jdbc:mariadb://localhost:3306/" + nomBaseDatos;
+        url = "jdbc:mariadb://localhost:3307/" + nomBaseDatos;
         usuario = "root";
         contraseña = "";
+    }
+    public static Connection getConexion() throws SQLException {
+    return getInstancia().getConnection();
     }
     
     public static Conexion getInstancia(){
@@ -29,13 +32,17 @@ public class Conexion {
         return instancia;
     }
     
-    public Connection getConnection() throws Exception{
-        // Si la conexión no existe o se cerró, abrimos una nueva
-        if (con == null || con.isClosed()) {
-            Class.forName(driver);
-            con = DriverManager.getConnection(url, usuario, contraseña);            
+    public Connection getConnection() throws SQLException {
+        try {
+            if (con == null || con.isClosed()) {
+                Class.forName(driver);
+                con = DriverManager.getConnection(url, usuario, contraseña);            
+            }
+            return con;
+        } catch (Exception e) {
+            throw new SQLException("Error al conectar a la base de datos: " + e.getMessage(), e);
         }
-        return con;
     }
 }
+
 
