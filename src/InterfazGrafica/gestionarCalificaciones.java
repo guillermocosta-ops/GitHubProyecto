@@ -2,6 +2,9 @@
 package InterfazGrafica;
 
 import Logica.Nota;
+import Logica.ControlDocente;
+import Logica.Estudiante;
+import Logica.Estudiantes;
 import Persistencia.Persistencia;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +79,7 @@ private void seleccionarNotaParaModificar() {
             for (Nota registro: lista) {
 
                 Object[] fila = {
-                    0,
+                    registro.getidNota(),
                     registro.getCi(),
                     "",
                     "",
@@ -242,7 +245,40 @@ private void seleccionarNotaParaModificar() {
             e.printStackTrace();
         }
     }
+    
+    private void cargarTablaEstudiantes(){
+        //Solamente vamos a mostrar y traer cedula y nombre
+        DefaultTableModel modelo = new DefaultTableModel(
+            new Object[] {"Cédula", "Nombre"}, 0)
+        {
+            @Override
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+         };
+        try {
+        ControlDocente control = new ControlDocente();
+        Estudiantes coleccion = control.obtenerEstudiantes();
 
+        // Recorremos la colección recibida desde la capa lógica
+        // (Asegúrate de ajustar 'getListaEstudiantes()' al nombre real de tu getter en la clase Estudiantes)
+        for (Estudiante est : coleccion.getListaEstudiantes()) { 
+            Object[] fila = {
+                est.getCi(),     
+                est.getNombre()
+            };
+            modelo.addRow(fila);
+        }
+
+        jTable1.setModel(modelo);
+        jTable1.setRowHeight(28);
+        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar estudiantes: " + e.getMessage());
+        e.printStackTrace();
+    }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

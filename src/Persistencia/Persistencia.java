@@ -1,7 +1,8 @@
 
 package Persistencia;
 import Logica.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.*;
 
 public class Persistencia {
@@ -57,7 +58,45 @@ public class Persistencia {
         return false;
     }
     }
-    public java.util.List<Usuario> obtenerTodosLosUsuarios() {
+    
+    //*******************************************
+    //               Traer listado de estudiantes
+    //*******************************************
+    
+    public Estudiantes obtenerEstudiantes(){
+        Estudiantes coleccion = new Estudiantes();
+        
+        String sql = "SELECT usuario.cedula, usuario.nombre"
+                + " FROM usuario " +
+                "INNER JOIN estudiante ON usuario.cedula = estudiante.cedula";
+        
+        try(Connection con = Conexion.getConexion();
+                PreparedStatement post = con.prepareStatement(sql);
+                
+                ResultSet result = post.executeQuery()){
+            
+                        int contador = 0;
+                        while (result.next()){
+                           String ci = result.getString("cedula");
+                           String nombre = result.getString("nombre");
+                                                      
+                        Estudiante est = new Estudiante(ci, nombre);
+                        
+                        coleccion.agregarEstudiante(est);
+                        contador ++;
+                        }
+                System.out.println("Se cargaron: " + contador + " alumnos");
+         }
+        catch (Exception e){
+                System.err.println("Error al listar estudiantes" + e.getMessage());
+                e.printStackTrace();//muestra erron en NetBeans - lo puse porque no me funciona y no encuentro error
+                }
+        return coleccion;
+        }
+     
+    
+    
+    public List<Usuario> obtenerTodosLosUsuarios() {
     
         java.util.List<Usuario> listaUsuarios = new java.util.ArrayList<>();
     
@@ -92,10 +131,10 @@ public class Persistencia {
     return listaUsuarios; // Retorna la lista llena de objetos
 }
     
-    public java.util.List<Nota> buscarCalificaciones(String cedula) {
+    public List<Nota> buscarCalificaciones(String cedula) {
     java.util.List<Nota> listaNotas = new java.util.ArrayList<>();
     
-    String sql = "SELECT nota.calificacion, nota.fecha, nota.tipo, nota.cedulaEstudiante "
+    String sql = "SELECT idNota, calificacion, fecha, tipo, cedulaEstudiante "
                + "FROM nota "
                + "WHERE nota.cedulaEstudiante = '" + cedula + "'";
 
@@ -105,6 +144,7 @@ public class Persistencia {
 
         while (rs.next()) {
             Nota nota = new Nota(
+                    rs.getInt("idNota"),
                 rs.getInt("calificacion"),
                 rs.getDate("fecha").toLocalDate(), // Convierte java.sql.Date a LocalDate
                 rs.getString("tipo"),
@@ -152,8 +192,41 @@ public class Persistencia {
     }
 }
     
+    //*******************************************
+    //                   Buscar notas con asignaturas para hacer promedios
+    //***********************************************
+  /* public List<Object[]> obtenerCalificacionesConCreditos() {
+    List<Object[]> lista = new ArrayList<>();
     
+    String sql = "SELECT cedulaEstudiante, a.idAsignatura, calificacion,  a.cantCreditos,  "
+               + "FROM nota "
+               + "INNER JOIN asignatura a ON nota.idAsignatura = a.idAsignatura";
+
+    try (Connection con = Conexion.getConexion();
+         PreparedStatement pst = con.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
+
+        while (rs.next()) {
+            int ci = rs.getInt("cedulaEstudiante");
+            String idAsignatura = rs.getString("idAsignatura");
+            int calificacion = rs.getInt("calificacion");
+            int creditos = rs.getInt("cantCreditos");
+            
+            // Guardamos el arreglo con los datos necesarios para el cálculo
+            lista.add(new Object[]{ci, idAsignatura, calificacion,  creditos, });
+        }
+
+    } catch (SQLException e) {
+        System.err.println("Error al obtener notas con créditos: " + e.getMessage());
+        e.printStackTrace();
+    }
+    
+    return lista;
 }
+   */
+   
+    }
+
     //public ListadoProductos devolverProducto() throws Exception {
     //Conexion DB = Conexion.getInstancia();
     //Connection conn = DB.getConnection();

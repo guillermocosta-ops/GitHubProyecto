@@ -153,7 +153,7 @@ public class interfazUsuario extends javax.swing.JFrame {
             new interfazAdmin().setVisible(true);
             this.dispose(); // Cierra el login
 } 
-        else if (rol.equals("profesor")) {
+        else if (rol.equals("docente")) {
             new interfazDocente().setVisible(true);
             this.dispose(); 
     } 

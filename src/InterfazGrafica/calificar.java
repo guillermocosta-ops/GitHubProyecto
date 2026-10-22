@@ -4,13 +4,15 @@
  */
 package InterfazGrafica;
 
-import Persistencia.Conexion;
+import Persistencia.Conexion;// para mi esta no va x q tiene que pasar por la capa logica antes de ir a persitencia
+import Logica.ControlDocente;
+import Logica.Estudiantes;
+import Logica.Estudiante;
 import java.sql.*;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class calificar extends javax.swing.JFrame {
-
 
 
     private int idAsignatura = 1; // Temporal: cambiar por la asignatura seleccionada
@@ -21,14 +23,31 @@ public class calificar extends javax.swing.JFrame {
         cargarEstudiantes();
     }
    private void cargarEstudiantes() {
-
+       ControlDocente control = new ControlDocente();
+       Estudiantes listado = control.obtenerEstudiantes();
+       
+       if (listado == null || listado.getListaEstudiantes() == null) {
+        JOptionPane.showMessageDialog(this, "Error: No se pudo obtener la lista de estudiantes.");
+            return;
+    }   
+    
+    
+    //defino colimnas para la tabla
     DefaultTableModel modelo = new DefaultTableModel();
 
     modelo.addColumn("Cédula");
     modelo.addColumn("Nombre");
-    modelo.addColumn("Asignatura");
-    modelo.addColumn("Nota");
-
+   
+    for (Estudiante est : listado.getListaEstudiantes()){
+        Object[] fila = {
+                est.getCi(),
+                est.getNombre()
+                };
+        modelo.addRow(fila);
+        }
+    jTable1.setModel(modelo);
+    
+    /*
     try {
         Conexion DB = Conexion.getInstancia();
         Connection conn = DB.getConnection();
@@ -76,7 +95,8 @@ String sql = "SELECT u.cedula, u.nombre, " +
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this,
                 "Error al cargar estudiantes: " + e.getMessage());
-    }
+    }*/
+    
 } 
 
 

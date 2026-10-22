@@ -13,6 +13,10 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
+    public Usuario(String ci, String nombre) {
+        this.ci = ci;
+        this.nombre = nombre;
+     }
     public String getCi() {
         return ci;
     }

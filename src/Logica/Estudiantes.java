@@ -6,9 +6,14 @@ package Logica;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class Estudiantes {
     private List<Estudiante>listaEstudiantes;
 
+    //construtor sin parametros para inicializar una lista vacia
+    public Estudiantes(){
+        this.listaEstudiantes = new ArrayList<>();
+    }
     public Estudiantes(List<Estudiante> listaEstudiantes) {
         this.listaEstudiantes = listaEstudiantes;
     }
@@ -19,4 +24,12 @@ public class Estudiantes {
     public void eliminarEstudiante(Estudiante estudiante) {
         listaEstudiantes.remove(estudiante);
     }
+    
+    //Get y set para que la interfaz pueda operar
+    public List<Estudiante> getListaEstudiantes(){
+        return listaEstudiantes;
+    }
+     public void setListaEstudiantes(List<Estudiante> listaEstudiantes){
+         this.listaEstudiantes = listaEstudiantes;
+     }
 }

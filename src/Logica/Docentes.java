@@ -6,8 +6,14 @@ package Logica;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class Docentes {
     private List<Docente>listaDocentes;
+    
+    //Constructor para inicializar lista vacia
+    public Docentes(){
+        this.listaDocentes = new ArrayList<>();
+    }
 
     public Docentes(List<Docente> listaDocentes) {
         this.listaDocentes = listaDocentes;
@@ -20,6 +26,15 @@ public class Docentes {
 
     public void eliminarDocente(Docente docente) {
         listaDocentes.remove(docente);
+    }
+    
+    //Get y Set para la lista
+    public List<Docente> getListaDocentes(){
+        return listaDocentes;
+    }
+    
+    public void setListaDocentes(List<Docente> listDocentes){
+        this.listaDocentes = listaDocentes;
     }
 }
 

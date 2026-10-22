@@ -11,18 +11,34 @@ import java.time.LocalDate;
  * @author guill
  */
 public class Nota {
+    private int idNota;
     private int nota;
     private LocalDate fecha;
     private String tipo;
     private int ci;
 
-    public Nota(int nota, LocalDate fecha, String tipo, int ci) {
+    public Nota(int idNota, int nota, LocalDate fecha, String tipo, int ci) {
+        this.idNota = idNota;
         this.nota = nota;
         this.fecha = fecha;
         this.tipo = tipo;
         this.ci = ci;
     }
-
+    public Nota(int idNota, LocalDate fecha, String tipo, int nota) {
+        this.idNota = idNota;
+        this.fecha = fecha;
+        this.tipo = tipo;
+        this.nota = nota;
+    }
+    
+    
+    public int getidNota(){
+        return idNota;
+    }
+    
+    public void setidNota(int idNota){
+        this.idNota = idNota;
+    }
     public int getNota() {
         return nota;
     }
