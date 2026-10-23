@@ -1,27 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Logica;
-
-import Persistencia.Persistencia;
-/**
- *
- * @author default
- */
 public class Login {
-    private Persistencia persistencia = new Persistencia();
-
+    private static String cedulaActual;
     public boolean validarLogin(String cedula, String contrasena) {
-        // Si no escribió nada, retorna nulo directamente
-        if (cedula.trim().isEmpty() || contrasena.trim().isEmpty()) {
-            return false;
+        CargaInicial.exigirCarga();
+        cedulaActual=null;
+        if (cedula==null || contrasena==null || cedula.isBlank() || contrasena.isEmpty()) return false;
+        for (Usuario u : Usuarios.getInstancia().getListaUsuarios()) {
+            if (u.getCi().equals(cedula.trim()) && contrasena.equals(u.getContrasena())) {
+                cedulaActual = u.getCi(); return true;
+            }
         }
-        // Si escribió algo, consulta la base de datos
-        return persistencia.validarUsuario(cedula.trim(), contrasena.trim());
+        return false;
     }
-    
     public String obtenerRol(String cedula) {
-        return persistencia.obtenerRol(cedula);
+        CargaInicial.exigirCarga();
+        if(cedula==null) return "";
+        for(Admin a:Admins.getInstancia().getListaAdmins()) if(a.getCi().equals(cedula)) return "admin";
+        for(Docente d:Docentes.getInstancia().getListaDocentes()) if(d.getCi().equals(cedula)) return "docente";
+        for(Estudiante e:Estudiantes.getInstancia().getListaEstudiantes()) if(e.getCi().equals(cedula)) return "estudiante";
+        return "";
     }
+    public static String getCedulaActual() { return cedulaActual; }
 }

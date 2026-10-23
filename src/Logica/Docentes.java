@@ -1,40 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Logica;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Docentes {
-    private List<Docente>listaDocentes;
-    
-    //Constructor para inicializar lista vacia
-    public Docentes(){
-        this.listaDocentes = new ArrayList<>();
-    }
+    private static final Docentes INSTANCIA = new Docentes();
+    private final List<Docente> listaDocentes = new ArrayList<>();
 
-    public Docentes(List<Docente> listaDocentes) {
-        this.listaDocentes = listaDocentes;
+    public Docentes() { }
+    public Docentes(List<Docente> elementos) { reemplazar(elementos); }
+    public static Docentes getInstancia() { return INSTANCIA; }
+    public synchronized List<Docente> getListaDocentes() { return List.copyOf(listaDocentes); }
+    public synchronized void reemplazar(List<Docente> elementos) {
+        Objects.requireNonNull(elementos);
+        listaDocentes.clear();
+        listaDocentes.addAll(elementos);
     }
+    public synchronized void agregarDocente(Docente elemento) {
+        listaDocentes.add(Objects.requireNonNull(elemento));
+    }
+    public synchronized void setListaDocentes(List<Docente> nuevos) { reemplazar(nuevos); }
+    public synchronized void eliminarDocente(Docente elemento) { listaDocentes.remove(elemento); }
 
-   
-     public void agregarDocente(Docente docente) {
-        listaDocentes.add(docente);
-    }
-
-    public void eliminarDocente(Docente docente) {
-        listaDocentes.remove(docente);
-    }
-    
-    //Get y Set para la lista
-    public List<Docente> getListaDocentes(){
-        return listaDocentes;
-    }
-    
-    public void setListaDocentes(List<Docente> listDocentes){
-        this.listaDocentes = listaDocentes;
+    /** Obtiene la entidad autenticada desde la colección cargada en el Splash. */
+    public Docente obtenerSesionActual() {
+        CargaInicial.exigirCarga();
+        String ci = Login.getCedulaActual();
+        if (ci != null) {
+            for (Docente entidad : getListaDocentes()) {
+                if (ci.equals(entidad.getCi())) return entidad;
+            }
+        }
+        throw new IllegalStateException("No hay un docente con sesión iniciada");
     }
 }
-

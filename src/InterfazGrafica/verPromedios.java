@@ -4,6 +4,14 @@
  */
 package InterfazGrafica;
 
+import Logica.Asignatura;
+import Logica.Docente;
+import Logica.Docentes;
+import Logica.Estudiante;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author guill
@@ -15,6 +23,55 @@ public class verPromedios extends javax.swing.JFrame {
      */
     public verPromedios() {
         initComponents();
+        setTitle("Promedios por asignatura");
+        setLocationRelativeTo(null);
+        setSize(820, 470);
+        cargarPromedios();
+    }
+
+    // Consulta las colecciones cargadas por el Splash desde la capa Logica.
+    private void cargarPromedios() {
+        DefaultTableModel modelo = new DefaultTableModel(
+                new String[]{"Cédula", "Nombre", "Asignatura", "Promedio"}, 0) {
+            @Override
+            public boolean isCellEditable(int fila, int columna) {
+                return false;
+            }
+        };
+
+        try {
+            Docente control = Docentes.getInstancia().obtenerSesionActual();
+            List<Asignatura> asignaturas = control.obtenerMisAsignaturas();
+
+            for (Asignatura asignatura : asignaturas) {
+                List<Estudiante> estudiantes =
+                        control.obtenerEstudiantesDeAsignatura(asignatura.getId());
+
+                for (Estudiante estudiante : estudiantes) {
+                    Double promedio = control.calcularPromedioSimpleEstudiante(
+                            estudiante.getCi(), asignatura.getId());
+
+                    modelo.addRow(new Object[]{
+                        estudiante.getCi(),
+                        estudiante.getNombre(),
+                        asignatura.getNombre(),
+                        promedio == null ? "Sin notas" : promedio
+                    });
+                }
+            }
+
+            jTable1.setModel(modelo);
+            jTable1.setAutoCreateRowSorter(true);
+            jTable1.setRowHeight(26);
+
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "No se pudieron mostrar los promedios: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     /**
@@ -56,22 +113,20 @@ public class verPromedios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(318, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

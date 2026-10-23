@@ -25,7 +25,7 @@ public class verEstudiantes extends javax.swing.JFrame {
     };
 
     try {
-        ControlDocente control = new ControlDocente();
+        Docente control = Docentes.getInstancia().obtenerSesionActual();
         Estudiantes coleccion = control.obtenerEstudiantes();
 
         // Recorremos la colección obtenida

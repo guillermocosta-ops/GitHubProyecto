@@ -1,49 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Logica;
-
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 public class Notas {
-     private  List<Nota> listaNota;
-
-    public Notas(List<Nota> listaNota) {
-        this.listaNota = listaNota;
+    private static final Notas INSTANCIA = new Notas();
+    private final List<Nota> listaNota = new ArrayList<>();
+    public Notas() { }
+    public Notas(List<Nota> elementos) { reemplazar(elementos); }
+    public static Notas getInstancia() { return INSTANCIA; }
+    public synchronized List<Nota> getListaNota() { return List.copyOf(listaNota); }
+    public synchronized void reemplazar(List<Nota> nuevos) {
+        Objects.requireNonNull(nuevos);
+        listaNota.clear();
+        for (Nota n : nuevos) agregarNota(n);
     }
-   public List<Nota> getListaNota() {
-        return List.copyOf(listaNota);
-    }
-
-    public void agregarNota(Nota nota) {
+    public synchronized void agregarNota(Nota nota) {
+        Objects.requireNonNull(nota);
+        if (buscarPorId(nota.getidNota()) != null) throw new IllegalArgumentException("ID de nota duplicado");
         listaNota.add(nota);
     }
-
-    public void modificarNota(Nota notaModificada) {
-        for (int i = 0; i < listaNota.size(); i++) {
-            Nota notaActual = listaNota.get(i);
-
-            boolean mismaCedula =
-                notaActual.getCi() == notaModificada.getCi();
-
-            boolean mismoTipo =
-                notaActual.getTipo().equalsIgnoreCase(
-                    notaModificada.getTipo()
-                );
-
-            if (mismaCedula && mismoTipo) {
-                listaNota.set(i, notaModificada);
-                return;
-            }
+    public synchronized Nota buscarPorId(int id) {
+        for (Nota n : listaNota) if (n.getidNota()==id) return n;
+        return null;
+    }
+    public synchronized void modificarNota(Nota nueva) {
+        for (int i=0; i<listaNota.size(); i++) {
+            if (listaNota.get(i).getidNota()==nueva.getidNota()) { listaNota.set(i,nueva); return; }
         }
-
-        agregarNota(notaModificada);
+        throw new IllegalArgumentException("La nota no existe");
     }
-
-    public void eliminarNota(Nota nota) {
-        listaNota.remove(nota);
+    public synchronized void eliminarNota(Nota n) { eliminarNota(n.getidNota()); }
+    public synchronized void eliminarNota(int id) {
+        if (!listaNota.removeIf(n -> n.getidNota()==id)) throw new IllegalArgumentException("La nota no existe");
     }
-}   
-
+}

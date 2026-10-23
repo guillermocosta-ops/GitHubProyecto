@@ -5,16 +5,7 @@ package InterfazGrafica;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Pablo
- */
 public class frmSplash extends javax.swing.JFrame implements Runnable{
 
    
@@ -25,21 +16,40 @@ public class frmSplash extends javax.swing.JFrame implements Runnable{
         
     }
     @Override
-    public void run(){
-        
-     try{  
-        this.setLocationRelativeTo(null);//ubica el formulario en el centro de la pantalla
-        this.setVisible(true);//lo hace visible
-        t.sleep(4000);//hace que el hilo del programa se detenga 4 segundos
-        this.dispose();//cierra el formulario splash
-        new interfazUsuario().setVisible(true);//aparece formulario principal
-        
-    
-     }catch(InterruptedException ex){
-       Logger.getLogger(frmSplash.class.getName()).log(Level.SEVERE,null,ex);//codigo generado para controlar errores
-     }
+    public void run() {
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            setLocationRelativeTo(null);
+            java.net.URL logo = getClass().getResource("/imagenes/logo_pd.png");
+            if (logo != null) jLabel1.setIcon(new javax.swing.ImageIcon(logo));
+            setVisible(true);
+            javax.swing.SwingWorker<Void, Void> worker = new javax.swing.SwingWorker<>() {
+                @Override
+                protected Void doInBackground() {
+                    Logica.CargaInicial.cargarTodo();
+                    return null;
+                }
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                        if (!Logica.CargaInicial.estaCargado())
+                            throw new IllegalStateException("Carga incompleta");
+                        dispose();
+                        new interfazUsuario().setVisible(true);
+                    } catch (Exception ex) {
+                        Throwable causa = ex.getCause() != null ? ex.getCause() : ex;
+                        JOptionPane.showMessageDialog(frmSplash.this,
+                                "No se pudo iniciar SGA: " + causa.getMessage(),
+                                "Error de carga", JOptionPane.ERROR_MESSAGE);
+                        dispose();
+                        System.exit(1);
+                    }
+                }
+            };
+            worker.execute();
+        });
     }
-     
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -71,9 +81,8 @@ public class frmSplash extends javax.swing.JFrame implements Runnable{
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    public static void main(String[]args){
-        new Thread (new frmSplash()).start();
-        System.out.println("asdasd");
+    public static void main(String[] args) {
+        javax.swing.SwingUtilities.invokeLater(() -> new frmSplash().run());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

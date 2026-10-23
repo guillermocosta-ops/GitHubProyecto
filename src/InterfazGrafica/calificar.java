@@ -4,101 +4,58 @@
  */
 package InterfazGrafica;
 
-import Persistencia.Conexion;// para mi esta no va x q tiene que pasar por la capa logica antes de ir a persitencia
-import Logica.ControlDocente;
+import Logica.Docente;
+import Logica.Docentes;
 import Logica.Estudiantes;
 import Logica.Estudiante;
-import java.sql.*;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class calificar extends javax.swing.JFrame {
 
 
-    private int idAsignatura = 1; // Temporal: cambiar por la asignatura seleccionada
+    private int idAsignatura;
+    private Docente control() {
+        return Docentes.getInstancia().obtenerSesionActual();
+    }
 
     public calificar() {
         initComponents();
         setLocationRelativeTo(null);
-        cargarEstudiantes();
+        seleccionarAsignatura();
     }
-   private void cargarEstudiantes() {
-       ControlDocente control = new ControlDocente();
-       Estudiantes listado = control.obtenerEstudiantes();
-       
-       if (listado == null || listado.getListaEstudiantes() == null) {
-        JOptionPane.showMessageDialog(this, "Error: No se pudo obtener la lista de estudiantes.");
-            return;
-    }   
-    
-    
-    //defino colimnas para la tabla
-    DefaultTableModel modelo = new DefaultTableModel();
 
-    modelo.addColumn("Cédula");
-    modelo.addColumn("Nombre");
-   
-    for (Estudiante est : listado.getListaEstudiantes()){
-        Object[] fila = {
-                est.getCi(),
-                est.getNombre()
-                };
-        modelo.addRow(fila);
-        }
-    jTable1.setModel(modelo);
-    
-    /*
-    try {
-        Conexion DB = Conexion.getInstancia();
-        Connection conn = DB.getConnection();
-
-        
-String sql = "SELECT u.cedula, u.nombre, " +
-             "a.nombre AS asignatura, " +
-             "ROUND(AVG(n.calificacion), 2) AS nota " +
-             "FROM cursa c " +
-             "INNER JOIN estudiante e " +
-             "ON c.cedulaEstudiante = e.cedula " +
-             "INNER JOIN usuario u " +
-             "ON e.cedula = u.cedula " +
-             "INNER JOIN asignatura a " +
-             "ON c.idAsignatura = a.idAsignatura " +
-             "LEFT JOIN nota n " +
-             "ON n.cedulaEstudiante = c.cedulaEstudiante " +
-             "AND n.idAsignatura = c.idAsignatura " +
-             "WHERE c.idAsignatura = ? " +
-             "GROUP BY u.cedula, u.nombre, a.nombre";
-
-
-        try (PreparedStatement st = conn.prepareStatement(sql)) {
-
-            st.setInt(1, idAsignatura);
-
-            try (ResultSet rs = st.executeQuery()) {
-
-                while (rs.next()) {
-
-                    Object[] fila = {
-                        rs.getString("cedula"),
-                        rs.getString("nombre"),
-                        rs.getString("asignatura"),
-                        rs.getObject("nota")
-                    };
-
-                    modelo.addRow(fila);
-                }
+    private void seleccionarAsignatura() {
+        try {
+            java.util.List<Logica.Asignatura> materias = control().obtenerMisAsignaturas();
+            if (materias.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No hay asignaturas asignadas al docente actual");
+                return;
             }
+            String[] opciones = new String[materias.size()];
+            for (int i=0; i<materias.size(); i++)
+                opciones[i] = materias.get(i).getId() + " - " + materias.get(i).getNombre();
+            String elegida;
+            if (opciones.length == 1) elegida=opciones[0];
+            else elegida = (String) JOptionPane.showInputDialog(this, "Seleccione la asignatura",
+                    "Calificar", JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+            if (elegida == null) return;
+            idAsignatura = Integer.parseInt(elegida.substring(0, elegida.indexOf(" - ")));
+            cargarEstudiantes();
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
         }
+    }
 
+    private void cargarEstudiantes() {
+        DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Cédula", "Nombre"}, 0) {
+            @Override public boolean isCellEditable(int fila, int columna) { return false; }
+        };
+        for (Estudiante est : control().obtenerEstudiantesDeAsignatura(idAsignatura))
+            modelo.addRow(new Object[]{est.getCi(), est.getNombre()});
         jTable1.setModel(modelo);
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this,
-                "Error al cargar estudiantes: " + e.getMessage());
-    }*/
-    
-} 
-
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -223,88 +180,27 @@ String sql = "SELECT u.cedula, u.nombre, " +
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  
-
-    try {
-
-        // Verificar que haya un estudiante seleccionado
-        int fila = jTable1.getSelectedRow();
-
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(this,
-                    "Seleccione un estudiante de la tabla");
-            return;
+        try {
+            if (idAsignatura == 0) throw new IllegalArgumentException("Seleccione una asignatura");
+            int fila = jTable1.getSelectedRow();
+            if (fila < 0) throw new IllegalArgumentException("Seleccione un estudiante");
+            String ci = jTable1.getValueAt(fila, 0).toString();
+            String tipo = jRadioButton1.isSelected() ? "Oral"
+                    : jRadioButton2.isSelected() ? "Proyecto"
+                    : jRadioButton3.isSelected() ? "Tarea domiciliaria"
+                    : jRadioButton4.isSelected() ? "Escrito" : "";
+            if (tipo.isEmpty()) throw new IllegalArgumentException("Seleccione el tipo de evaluación");
+            int nota = Integer.parseInt(jTextField1.getText().trim());
+            control().ingresarDatosNota(ci, idAsignatura, tipo, nota);
+            JOptionPane.showMessageDialog(this, "Calificación guardada correctamente");
+            jTextField1.setText("");
+            buttonGroup4.clearSelection();
+            cargarEstudiantes();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Ingrese una nota numérica válida");
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "No se pudo guardar: " + ex.getMessage());
         }
-
-        // Obtener cédula
-        String cedulaEstudiante = jTable1.getValueAt(fila, 0).toString();
-
-        // Obtener tipo de evaluación
-        String tipo = "";
-
-        if (jRadioButton1.isSelected()) {
-            tipo = "Oral";
-        } else if (jRadioButton2.isSelected()) {
-            tipo = "Proyecto";
-        } else if (jRadioButton3.isSelected()) {
-            tipo = "Tarea domiciliaria";
-        } else if (jRadioButton4.isSelected()) {
-            tipo = "Escrito";
-        }
-
-        if (tipo.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                    "Seleccione un tipo de evaluación");
-            return;
-        }
-
-        // Obtener nota
-        int nota = Integer.parseInt(jTextField1.getText().trim());
-
-        if (nota < 1 || nota > 12) {
-            JOptionPane.showMessageDialog(this,
-                    "La nota debe estar entre 1 y 12");
-            return;
-        }
-
-        // Conexión
-        Conexion DB = Conexion.getInstancia();
-        Connection conn = DB.getConnection();
-
-        // Guardar la evaluación
-        String sql = "INSERT INTO nota " +
-                "(cedulaEstudiante, idAsignatura, tipo, calificacion, fecha) " +
-                "VALUES (?, ?, ?, ?, CURRENT_DATE())";
-
-        try (PreparedStatement st = conn.prepareStatement(sql)) {
-
-            st.setString(1, cedulaEstudiante);
-            st.setInt(2, idAsignatura);
-            st.setString(3, tipo);
-            st.setInt(4, nota);
-
-            st.executeUpdate();
-        }
-
-        JOptionPane.showMessageDialog(this,
-                "Calificación agregada correctamente");
-
-        // Limpiar componentes
-        jTextField1.setText("");
-        buttonGroup4.clearSelection();
-
-        // Actualizar tabla
-        cargarEstudiantes();
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this,
-                "Ingrese una nota numérica válida");
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this,
-                "Error: " + e.getMessage());
-    }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

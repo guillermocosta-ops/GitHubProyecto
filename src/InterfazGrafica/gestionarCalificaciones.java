@@ -2,10 +2,11 @@
 package InterfazGrafica;
 
 import Logica.Nota;
-import Logica.ControlDocente;
+import Logica.Docente;
+import Logica.Docentes;
 import Logica.Estudiante;
 import Logica.Estudiantes;
-import Persistencia.Persistencia;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -58,58 +59,31 @@ private void seleccionarNotaParaModificar() {
     // =====================================
 
     private void cargarCalificaciones(String cedula) {
-
         DefaultTableModel modelo = new DefaultTableModel(
-            new Object[]{
-                "ID", "Cédula", "Nombre",
-                "Asignatura", "Tipo", "Nota", "Fecha"
-            }, 0
-        ) {
-            @Override
-            public boolean isCellEditable(int fila, int columna) {
-                return false;
-            }
+                new Object[]{"ID", "Cédula", "Nombre", "Asignatura", "Tipo", "Nota", "Fecha"},0) {
+            @Override public boolean isCellEditable(int f, int c) { return false; }
         };
-
         try {
-            Persistencia p = new Persistencia();
-
-            List<Nota> lista = p.buscarCalificaciones(cedula);
-
-            for (Nota registro: lista) {
-
-                Object[] fila = {
-                    registro.getidNota(),
-                    registro.getCi(),
-                    "",
-                    "",
-                    registro.getTipo(),
-                    registro.getNota(),
-                    registro.getFecha()
-                };
-
-                modelo.addRow(fila);
+            Docente control = Docentes.getInstancia().obtenerSesionActual();
+            for (Nota nota : control.buscarCalificaciones(cedula)) {
+                String nombre = "";
+                String materia = "";
+                for (Estudiante est : Logica.Estudiantes.getInstancia().getListaEstudiantes())
+                    if (est.getCi().equals(nota.getCi())) { nombre=est.getNombre(); break; }
+                for (Logica.Asignatura a : Logica.Asignaturas.getInstancia().getListaAsignatura())
+                    if (nota.getIdAsignatura() != null && a.getId()==nota.getIdAsignatura()) {
+                        materia=a.getNombre(); break;
+                    }
+                modelo.addRow(new Object[]{nota.getidNota(), nota.getCi(), nombre,
+                        materia, nota.getTipo(), nota.getNota(), nota.getFecha()});
             }
-
             jTable1.setModel(modelo);
-
-            // Ocultar ID, pero conservarlo en el modelo
-            jTable1.removeColumn(
-                jTable1.getColumnModel().getColumn(0)
-            );
-
+            jTable1.removeColumn(jTable1.getColumnModel().getColumn(0));
             jTable1.setRowHeight(28);
-            jTable1.setSelectionMode(
-                ListSelectionModel.SINGLE_SELECTION
-            );
-
+            jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             jTable1.setAutoCreateRowSorter(true);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,
-                "Error al cargar calificaciones: " + e.getMessage());
-
-            e.printStackTrace();
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Error al cargar notas: " + ex.getMessage());
         }
     }
 
@@ -173,9 +147,7 @@ private void seleccionarNotaParaModificar() {
                 return;
             }
 
-            Persistencia p = new Persistencia();
-
-            p.modificarNota(idNota, nuevaNota);
+            Docentes.getInstancia().obtenerSesionActual().modificarNota(idNota, nuevaNota);
 
             JOptionPane.showMessageDialog(this,
                 "Calificación modificada correctamente");
@@ -224,9 +196,7 @@ private void seleccionarNotaParaModificar() {
         }
 
         try {
-            Persistencia p = new Persistencia();
-
-            p.eliminarNota(idNota);
+            Docentes.getInstancia().obtenerSesionActual().eliminarNota(idNota);
 
             JOptionPane.showMessageDialog(this,
                 "Calificación eliminada correctamente");
@@ -257,7 +227,7 @@ private void seleccionarNotaParaModificar() {
         }
          };
         try {
-        ControlDocente control = new ControlDocente();
+        Docente control = Docentes.getInstancia().obtenerSesionActual();
         Estudiantes coleccion = control.obtenerEstudiantes();
 
         // Recorremos la colección recibida desde la capa lógica

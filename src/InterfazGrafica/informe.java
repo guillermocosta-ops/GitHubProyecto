@@ -4,17 +4,160 @@
  */
 package InterfazGrafica;
 
+import Logica.Asignatura;
+import Logica.Docente;
+import Logica.Docentes;
+import Logica.Estudiante;
+import Logica.InformeAcademico;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+
 /**
  *
  * @author guill
  */
 public class informe extends javax.swing.JFrame {
 
+    private Docente control() {
+        return Docentes.getInstancia().obtenerSesionActual();
+    }
+    private final List<Asignatura> asignaturasDocente = new ArrayList<>();
+    private boolean guardando = false;
+
     /**
      * Creates new form informe
      */
     public informe() {
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Generar informe académico");
+        jLabel2.setText("Informe académico");
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setWrapStyleWord(true);
+        cargarAsignaturasDesdeMemoria();
+
+        // Si se cambia la materia, debe buscarse de nuevo el alumno.
+        choice1.addItemListener(evt -> jLabel2.setText("Informe académico"));
+    }
+
+    private void cargarAsignaturasDesdeMemoria() {
+        try {
+            asignaturasDocente.clear();
+            choice1.removeAll();
+            asignaturasDocente.addAll(control().obtenerMisAsignaturas());
+
+            for (Asignatura asignatura : asignaturasDocente) {
+                choice1.add(asignatura.getNombre());
+            }
+            if (asignaturasDocente.isEmpty()) {
+                jButton1.setEnabled(false);
+                jButton2.setEnabled(false);
+                JOptionPane.showMessageDialog(this,
+                        "Este docente no tiene asignaturas asignadas.",
+                        "Sin asignaturas", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (RuntimeException ex) {
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(false);
+            mostrarError("No se pudieron cargar las materias", ex);
+        }
+    }
+
+    private Asignatura asignaturaElegida() {
+        int indice = choice1.getSelectedIndex();
+        if (indice < 0 || indice >= asignaturasDocente.size()) {
+            throw new IllegalArgumentException("Seleccioná una materia");
+        }
+        return asignaturasDocente.get(indice);
+    }
+
+    private void buscarEstudiante() {
+        try {
+            Asignatura materia = asignaturaElegida();
+            Estudiante estudiante = control().buscarEstudianteParaInforme(
+                    jTextField1.getText().trim(), materia.getId());
+            jLabel2.setText("Alumno: " + estudiante.getNombre());
+            jLabel2.setToolTipText(estudiante.getNombre());
+        } catch (RuntimeException ex) {
+            jLabel2.setText("Informe académico");
+            mostrarError("No se pudo encontrar al estudiante", ex);
+        }
+    }
+
+    private void guardarInforme() {
+        if (guardando) {
+            return;
+        }
+
+        final Asignatura materia;
+        final String cedula = jTextField1.getText().trim();
+        final String contenido = jTextArea1.getText().trim();
+
+        try {
+            materia = asignaturaElegida();
+            Estudiante estudiante = control().buscarEstudianteParaInforme(
+                    cedula, materia.getId());
+            if (contenido.isEmpty()) {
+                throw new IllegalArgumentException("Escribí el informe antes de guardar");
+            }
+            jLabel2.setText("Alumno: " + estudiante.getNombre());
+        } catch (RuntimeException ex) {
+            mostrarError("No se puede guardar el informe", ex);
+            return;
+        }
+
+        int confirmacion = JOptionPane.showConfirmDialog(this,
+                "¿Guardar informe de " + cedula + " en "
+                + materia.getNombre() + "?",
+                "Confirmar informe", JOptionPane.YES_NO_OPTION);
+        if (confirmacion != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        guardando = true;
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+
+        new SwingWorker<InformeAcademico, Void>() {
+            @Override
+            protected InformeAcademico doInBackground() {
+                // JDBC se ejecuta fuera del hilo visual de Swing.
+                return control().generarInforme(
+                        cedula, materia.getId(), contenido);
+            }
+
+            @Override
+            protected void done() {
+                guardando = false;
+                jButton1.setEnabled(true);
+                jButton2.setEnabled(true);
+                jButton3.setEnabled(true);
+
+                try {
+                    InformeAcademico creado = get();
+                    JOptionPane.showMessageDialog(informe.this,
+                            "Informe guardado correctamente. ID: "
+                            + creado.getIdInforme());
+                    jTextArea1.setText("");
+                } catch (InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                    mostrarError("Se interrumpió el guardado", ex);
+                } catch (java.util.concurrent.ExecutionException ex) {
+                    Throwable causa = ex.getCause() != null
+                            ? ex.getCause() : ex;
+                    mostrarError("No se pudo guardar el informe", causa);
+                }
+            }
+        }.execute();
+    }
+
+    private void mostrarError(String contexto, Throwable ex) {
+        JOptionPane.showMessageDialog(this,
+                contexto + ": " + ex.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     /**
@@ -143,15 +286,15 @@ public class informe extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        guardarInforme();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        buscarEstudiante();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        buscarEstudiante();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

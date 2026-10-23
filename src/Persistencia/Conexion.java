@@ -1,48 +1,20 @@
-
 package Persistencia;
-
-import java.util.*;
-import java.sql.*;
-
-public class Conexion {
-    private static Conexion instancia;
-    
-    private Connection con;
-    private String driver;
-    private String url;
-    private String usuario;
-    private String contraseña;
-    private String nomBaseDatos;
-    
-    private Conexion(){
-        nomBaseDatos = "bd_prueba";
-        driver = "org.mariadb.jdbc.Driver";
-        url = "jdbc:mariadb://localhost:3307/" + nomBaseDatos;
-        usuario = "root";
-        contraseña = "";
-    }
-    public static Connection getConexion() throws SQLException {
-    return getInstancia().getConnection();
-    }
-    
-    public static Conexion getInstancia(){
-        if (instancia == null){
-            instancia = new Conexion();
-        }
-        return instancia;
-    }
-    
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+public final class Conexion {
+    private static final Conexion INSTANCIA = new Conexion();
+    private final String base = "bd_prueba";
+    private final String driver = "org.mariadb.jdbc.Driver";
+    private final String url = "jdbc:mariadb://localhost:3306/" + base;
+    private final String usuario = "root";
+    private final String contrasena = "";
+    private Conexion() { }
+    public static Conexion getInstancia() { return INSTANCIA; }
     public Connection getConnection() throws SQLException {
-        try {
-            if (con == null || con.isClosed()) {
-                Class.forName(driver);
-                con = DriverManager.getConnection(url, usuario, contraseña);            
-            }
-            return con;
-        } catch (Exception e) {
-            throw new SQLException("Error al conectar a la base de datos: " + e.getMessage(), e);
-        }
+        try { Class.forName(driver); }
+        catch (ClassNotFoundException ex) { throw new SQLException("No se encontró el driver MariaDB", ex); }
+        return DriverManager.getConnection(url,usuario,contrasena);
     }
+    public static Connection getConexion() throws SQLException { return getInstancia().getConnection(); }
 }
-
-

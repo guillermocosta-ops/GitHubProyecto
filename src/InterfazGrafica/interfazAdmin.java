@@ -15,6 +15,25 @@ public class interfazAdmin extends javax.swing.JFrame {
      */
     public interfazAdmin() {
         initComponents();
+        setLocationRelativeTo(null);
+        // Se conecta fuera de initComponents() para conservar el .form.
+        jButton2.addActionListener(evt -> {
+            new gestionarEstudiante().setVisible(true);
+            dispose();
+        });
+        jButton4.addActionListener(evt -> {
+            new gestionarAsignatura().setVisible(true);
+            dispose();
+        });
+        jButton8.addActionListener(evt -> {
+            new gestionarInscripcion().setVisible(true);
+            dispose();
+        });
+        // El botón ya existe en el diseñador NetBeans; solo agregamos su acción.
+        jButton6.addActionListener(evt -> {
+            new generarInformeAdmin().setVisible(true);
+            dispose();
+        });
     }
 
     /**
@@ -83,7 +102,8 @@ public class interfazAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        new gestionarDocente().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
