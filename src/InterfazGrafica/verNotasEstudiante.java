@@ -1,5 +1,5 @@
 package InterfazGrafica;
-//FALTA
+//listo
 import Logica.Asignatura;
 import Logica.Estudiante;
 import Logica.Estudiantes;

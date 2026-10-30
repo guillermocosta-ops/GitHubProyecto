@@ -1,5 +1,5 @@
 package InterfazGrafica;
-
+//LISTOOOOO
 import Logica.Admin;
 import Logica.Admins;
 import Logica.InformeGeneral;

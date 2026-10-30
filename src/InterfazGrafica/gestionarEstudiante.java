@@ -1,6 +1,6 @@
 package InterfazGrafica;
 import Logica.Estudiantes;
-//FALTA
+//listo
 import Logica.Admin;
 import Logica.Admins;
 import Logica.Estudiante;

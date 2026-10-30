@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfazGrafica;
+//LISTO
 import Logica.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;

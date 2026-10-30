@@ -1,5 +1,5 @@
 package InterfazGrafica;
-
+//LISTO
 import Logica.Asignatura;
 import Logica.Estudiante;
 import Logica.Estudiantes;
@@ -19,7 +19,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-/** Promedio simple de evaluaciones por materia, en modo solo lectura. */
+
 public class verPromediosEstudiante extends JDialog {
 
     private Estudiante control() {
