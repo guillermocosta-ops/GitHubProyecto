@@ -79,36 +79,71 @@ public class gestionarInscripcion extends javax.swing.JFrame {
         estado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
-        principal.setLayout(new java.awt.BorderLayout(8, 8));
-        cabecera.setLayout(new java.awt.BorderLayout(8, 8));
+
+        principal.setLayout(new java.awt.BorderLayout());
+
+        cabecera.setLayout(new java.awt.BorderLayout());
+
         etiquetaTitulo.setText("Gestionar inscripciones");
-        buscadorPanel.setLayout(new java.awt.BorderLayout(8, 8));
-        etiquetaBuscar.setText("Buscar por cédula, estudiante o asignatura:");
-        inferior.setLayout(new java.awt.BorderLayout(8, 8));
-        botonesPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 8, 4));
-        inscribir.setText("Inscribir estudiante");
-        desinscribir.setText("Quitar inscripción seleccionada");
-        actualizar.setText("Actualizar tabla");
-        atras.setText("Atrás");
-        estado.setText(" ");
-        principal.add(cabecera, java.awt.BorderLayout.NORTH);
-        principal.add(scrollTabla, java.awt.BorderLayout.CENTER);
-        principal.add(inferior, java.awt.BorderLayout.SOUTH);
         cabecera.add(etiquetaTitulo, java.awt.BorderLayout.NORTH);
-        cabecera.add(buscadorPanel, java.awt.BorderLayout.SOUTH);
+
+        buscadorPanel.setLayout(new java.awt.BorderLayout());
+
+        etiquetaBuscar.setText("Buscar por cédula, estudiante o asignatura:");
         buscadorPanel.add(etiquetaBuscar, java.awt.BorderLayout.WEST);
         buscadorPanel.add(filtro, java.awt.BorderLayout.CENTER);
+
+        cabecera.add(buscadorPanel, java.awt.BorderLayout.SOUTH);
+
+        principal.add(cabecera, java.awt.BorderLayout.NORTH);
+
         scrollTabla.setViewportView(tabla);
-        inferior.add(botonesPanel, java.awt.BorderLayout.NORTH);
-        inferior.add(estado, java.awt.BorderLayout.SOUTH);
+
+        principal.add(scrollTabla, java.awt.BorderLayout.CENTER);
+
+        inferior.setLayout(new java.awt.BorderLayout());
+
+        inscribir.setText("Inscribir estudiante");
+        inscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inscribirActionPerformed(evt);
+            }
+        });
         botonesPanel.add(inscribir);
+
+        desinscribir.setText("Quitar inscripción seleccionada");
+        desinscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desinscribirActionPerformed(evt);
+            }
+        });
         botonesPanel.add(desinscribir);
+
+        actualizar.setText("Actualizar tabla");
         botonesPanel.add(actualizar);
+
+        atras.setText("Atrás");
         botonesPanel.add(atras);
+
+        inferior.add(botonesPanel, java.awt.BorderLayout.NORTH);
+
+        estado.setText(" ");
+        inferior.add(estado, java.awt.BorderLayout.SOUTH);
+
+        principal.add(inferior, java.awt.BorderLayout.SOUTH);
+
         getContentPane().add(principal, java.awt.BorderLayout.CENTER);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void inscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscribirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inscribirActionPerformed
+
+    private void desinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desinscribirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_desinscribirActionPerformed
 
 
     private void configurarComponentes() {

@@ -52,29 +52,44 @@ public class verPromediosEstudiante extends JDialog {
         cerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
-        principal.setLayout(new java.awt.BorderLayout(8, 8));
-        superior.setLayout(new java.awt.BorderLayout(8, 8));
+
+        principal.setLayout(new java.awt.BorderLayout());
+
+        superior.setLayout(new java.awt.BorderLayout());
+
         etiquetaTitulo.setText("Promedios por asignatura");
-        etiquetaAlumno.setText(" ");
-        inferior.setLayout(new java.awt.BorderLayout(8, 8));
-        info.setLayout(new java.awt.BorderLayout(8, 8));
-        estado.setText(" ");
-        etiquetaAyuda.setText("Promedio simple de las evaluaciones; no es la nota final de cursa.");
-        derecha.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 8, 4));
-        cerrar.setText("Cerrar");
-        principal.add(superior, java.awt.BorderLayout.NORTH);
-        principal.add(scrollTabla, java.awt.BorderLayout.CENTER);
-        principal.add(inferior, java.awt.BorderLayout.SOUTH);
         superior.add(etiquetaTitulo, java.awt.BorderLayout.NORTH);
+
+        etiquetaAlumno.setText(" ");
         superior.add(etiquetaAlumno, java.awt.BorderLayout.SOUTH);
+
+        principal.add(superior, java.awt.BorderLayout.NORTH);
+
         scrollTabla.setViewportView(tabla);
-        inferior.add(info, java.awt.BorderLayout.CENTER);
-        inferior.add(derecha, java.awt.BorderLayout.EAST);
+
+        principal.add(scrollTabla, java.awt.BorderLayout.CENTER);
+
+        inferior.setLayout(new java.awt.BorderLayout());
+
+        info.setLayout(new java.awt.BorderLayout());
+
+        estado.setText(" ");
         info.add(estado, java.awt.BorderLayout.NORTH);
+
+        etiquetaAyuda.setText("Promedio simple de las evaluaciones; no es la nota final de cursa.");
         info.add(etiquetaAyuda, java.awt.BorderLayout.SOUTH);
+
+        inferior.add(info, java.awt.BorderLayout.CENTER);
+
+        cerrar.setText("Cerrar");
         derecha.add(cerrar);
+
+        inferior.add(derecha, java.awt.BorderLayout.EAST);
+
+        principal.add(inferior, java.awt.BorderLayout.SOUTH);
+
         getContentPane().add(principal, java.awt.BorderLayout.CENTER);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 

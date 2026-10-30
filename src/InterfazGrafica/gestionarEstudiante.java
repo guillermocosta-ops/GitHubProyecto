@@ -109,62 +109,126 @@ public class gestionarEstudiante extends JFrame {
         estado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
-        principal.setLayout(new java.awt.BorderLayout(8, 8));
-        encabezado.setLayout(new java.awt.BorderLayout(8, 8));
+
+        principal.setLayout(new java.awt.BorderLayout());
+
+        encabezado.setLayout(new java.awt.BorderLayout());
+
         etiquetaTitulo.setText("Gestionar estudiantes");
-        buscadorPanel.setLayout(new java.awt.BorderLayout(8, 8));
-        etiquetaBuscar.setText("Buscar por nombre o cédula:");
-        formulario.setLayout(new java.awt.GridLayout(5, 2, 7, 7));
-        etiqueta1.setText("Cédula");
-        etiqueta2.setText("Nombre completo");
-        etiqueta3.setText("Contraseña");
-        etiqueta4.setText("Comentario");
-        comentario.setRows(4);
-        comentario.setColumns(20);
-        ayuda1.setText("Al modificar, contraseña vacía = no cambiar");
-        relleno1.setText(" ");
-        zonaInferior.setLayout(new java.awt.BorderLayout(8, 8));
-        botonesPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 8, 4));
-        nuevo.setText("Nuevo / Limpiar");
-        agregar.setText("Agregar");
-        modificar.setText("Modificar");
-        eliminar.setText("Eliminar");
-        inscribir.setText("Inscribir en asignatura");
-        atras.setText("Atrás");
-        estado.setText(" ");
-        principal.add(encabezado, java.awt.BorderLayout.NORTH);
-        principal.add(dividido, java.awt.BorderLayout.CENTER);
-        principal.add(zonaInferior, java.awt.BorderLayout.SOUTH);
         encabezado.add(etiquetaTitulo, java.awt.BorderLayout.NORTH);
-        encabezado.add(buscadorPanel, java.awt.BorderLayout.SOUTH);
+
+        buscadorPanel.setLayout(new java.awt.BorderLayout());
+
+        etiquetaBuscar.setText("Buscar por nombre o cédula:");
         buscadorPanel.add(etiquetaBuscar, java.awt.BorderLayout.WEST);
         buscadorPanel.add(buscar, java.awt.BorderLayout.CENTER);
-        dividido.setLeftComponent(scrollTabla);
-        dividido.setRightComponent(formulario);
+
+        encabezado.add(buscadorPanel, java.awt.BorderLayout.SOUTH);
+
+        principal.add(encabezado, java.awt.BorderLayout.NORTH);
+
         scrollTabla.setViewportView(tabla);
+
+        dividido.setLeftComponent(scrollTabla);
+
+        formulario.setLayout(new java.awt.GridLayout(5, 2));
+
+        etiqueta1.setText("Cédula");
         formulario.add(etiqueta1);
         formulario.add(cedula);
+
+        etiqueta2.setText("Nombre completo");
         formulario.add(etiqueta2);
         formulario.add(nombre);
+
+        etiqueta3.setText("Contraseña");
         formulario.add(etiqueta3);
         formulario.add(contrasena);
+
+        etiqueta4.setText("Comentario");
         formulario.add(etiqueta4);
-        formulario.add(scrollComentario);
-        formulario.add(ayuda1);
-        formulario.add(relleno1);
+
         scrollComentario.setViewportView(comentario);
-        zonaInferior.add(botonesPanel, java.awt.BorderLayout.NORTH);
-        zonaInferior.add(estado, java.awt.BorderLayout.SOUTH);
+
+        formulario.add(scrollComentario);
+
+        ayuda1.setText("Al modificar, contraseña vacía = no cambiar");
+        formulario.add(ayuda1);
+
+        relleno1.setText(" ");
+        formulario.add(relleno1);
+
+        dividido.setRightComponent(formulario);
+
+        principal.add(dividido, java.awt.BorderLayout.CENTER);
+
+        zonaInferior.setLayout(new java.awt.BorderLayout());
+
+        nuevo.setText("Nuevo / Limpiar");
+        nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoActionPerformed(evt);
+            }
+        });
         botonesPanel.add(nuevo);
+
+        agregar.setText("Agregar");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
         botonesPanel.add(agregar);
+
+        modificar.setText("Modificar");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
         botonesPanel.add(modificar);
+
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
         botonesPanel.add(eliminar);
+
+        inscribir.setText("Inscribir en asignatura");
         botonesPanel.add(inscribir);
+
+        atras.setText("Atrás");
         botonesPanel.add(atras);
+
+        zonaInferior.add(botonesPanel, java.awt.BorderLayout.NORTH);
+
+        estado.setText(" ");
+        zonaInferior.add(estado, java.awt.BorderLayout.SOUTH);
+
+        principal.add(zonaInferior, java.awt.BorderLayout.SOUTH);
+
         getContentPane().add(principal, java.awt.BorderLayout.CENTER);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nuevoActionPerformed
+
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarActionPerformed
+
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modificarActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarActionPerformed
 
 
     private void configurarComponentes() {

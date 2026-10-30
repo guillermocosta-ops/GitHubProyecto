@@ -77,41 +77,78 @@ public class verInformes extends JFrame {
         etiquetaEstado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
-        principal.setLayout(new java.awt.BorderLayout(8, 8));
-        filtros.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 8, 4));
+
+        principal.setLayout(new java.awt.BorderLayout());
+
         etiquetaMateria.setText("Asignatura:");
-        etiquetaCedula.setText("Cédula del estudiante:");
-        botonBuscar.setText("Buscar");
-        botonLimpiar.setText("Mostrar todos");
-        botonVolver.setText("Atrás");
-        centro.setLayout(new java.awt.GridLayout(2, 1, 7, 7));
-        listado.setLayout(new java.awt.BorderLayout(8, 8));
-        etiquetaListado.setText("Informes guardados por el docente:");
-        detalle.setLayout(new java.awt.BorderLayout(8, 8));
-        areaInforme.setRows(4);
-        areaInforme.setColumns(20);
-        etiquetaEstado.setText(" ");
-        principal.add(filtros, java.awt.BorderLayout.NORTH);
-        principal.add(centro, java.awt.BorderLayout.CENTER);
-        principal.add(etiquetaEstado, java.awt.BorderLayout.SOUTH);
         filtros.add(etiquetaMateria);
+
+        comboAsignaturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAsignaturasActionPerformed(evt);
+            }
+        });
         filtros.add(comboAsignaturas);
+
+        etiquetaCedula.setText("Cédula del estudiante:");
         filtros.add(etiquetaCedula);
+
+        campoCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoCedulaActionPerformed(evt);
+            }
+        });
         filtros.add(campoCedula);
+
+        botonBuscar.setText("Buscar");
         filtros.add(botonBuscar);
+
+        botonLimpiar.setText("Mostrar todos");
         filtros.add(botonLimpiar);
+
+        botonVolver.setText("Atrás");
         filtros.add(botonVolver);
-        centro.add(listado);
-        centro.add(detalle);
+
+        principal.add(filtros, java.awt.BorderLayout.NORTH);
+
+        centro.setLayout(new java.awt.GridLayout(2, 1));
+
+        listado.setLayout(new java.awt.BorderLayout());
+
+        etiquetaListado.setText("Informes guardados por el docente:");
         listado.add(etiquetaListado, java.awt.BorderLayout.NORTH);
-        listado.add(scrollTabla, java.awt.BorderLayout.CENTER);
+
         scrollTabla.setViewportView(tabla);
-        detalle.add(scrollInforme, java.awt.BorderLayout.CENTER);
+
+        listado.add(scrollTabla, java.awt.BorderLayout.CENTER);
+
+        centro.add(listado);
+
+        detalle.setLayout(new java.awt.BorderLayout());
+
         scrollInforme.setViewportView(areaInforme);
+
+        detalle.add(scrollInforme, java.awt.BorderLayout.CENTER);
+
+        centro.add(detalle);
+
+        principal.add(centro, java.awt.BorderLayout.CENTER);
+
+        etiquetaEstado.setText(" ");
+        principal.add(etiquetaEstado, java.awt.BorderLayout.SOUTH);
+
         getContentPane().add(principal, java.awt.BorderLayout.CENTER);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void comboAsignaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAsignaturasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboAsignaturasActionPerformed
+
+    private void campoCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoCedulaActionPerformed
 
     private void configurarComponentes() {
 

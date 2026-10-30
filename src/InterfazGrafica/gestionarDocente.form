@@ -1,73 +1,79 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8" ?>
+
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="2" />
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
-    <SyntheticProperty name="formSizePolicy" type="int" value="1" />
-    <SyntheticProperty name="generateCenter" type="boolean" value="false" />
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0" />
-    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false" />
-    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true" />
-    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false" />
-    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false" />
-    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1" />
-    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0" />
-    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false" />
-    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2" />
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,44,0,0,1,-112"/>
   </AuxValues>
-  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" />
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="principal">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-          <BorderConstraints direction="Center" />
+          <BorderConstraints direction="Center"/>
         </Constraint>
       </Constraints>
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" />
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="encabezado">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-              <BorderConstraints direction="North" />
+              <BorderConstraints direction="North"/>
             </Constraint>
           </Constraints>
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" />
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
           <SubComponents>
             <Component class="javax.swing.JLabel" name="etiquetaTitulo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Gestionar docentes" />
+                <Property name="text" type="java.lang.String" value="Gestionar docentes"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                  <BorderConstraints direction="North" />
+                  <BorderConstraints direction="North"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Container class="javax.swing.JPanel" name="buscadorPanel">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                  <BorderConstraints direction="South" />
+                  <BorderConstraints direction="South"/>
                 </Constraint>
               </Constraints>
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" />
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="etiquetaBuscar">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Buscar por nombre o cédula:" />
+                    <Property name="text" type="java.lang.String" value="Buscar por nombre o c&#xe9;dula:"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                      <BorderConstraints direction="West" />
+                      <BorderConstraints direction="West"/>
                     </Constraint>
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="filtro">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                      <BorderConstraints direction="Center" />
+                      <BorderConstraints direction="Center"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -78,80 +84,89 @@
         <Container class="javax.swing.JSplitPane" name="dividido">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-              <BorderConstraints direction="Center" />
+              <BorderConstraints direction="Center"/>
             </Constraint>
           </Constraints>
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" />
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
           <SubComponents>
             <Container class="javax.swing.JScrollPane" name="scrollTabla">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
-                  <JSplitPaneConstraints position="left" />
+                  <JSplitPaneConstraints position="left"/>
                 </Constraint>
               </Constraints>
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout" />
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tabla" />
+                <Component class="javax.swing.JTable" name="tabla">
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="formulario">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
-                  <JSplitPaneConstraints position="right" />
+                  <JSplitPaneConstraints position="right"/>
                 </Constraint>
               </Constraints>
+
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                <Property name="rows" type="int" value="6" />
-                <Property name="columns" type="int" value="2" />
+                <Property name="columns" type="int" value="2"/>
+                <Property name="rows" type="int" value="6"/>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="etiqueta1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cédula" />
+                    <Property name="text" type="java.lang.String" value="C&#xe9;dula"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="cedula" />
+                <Component class="javax.swing.JTextField" name="cedula">
+                </Component>
                 <Component class="javax.swing.JLabel" name="etiqueta2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Nombre completo" />
+                    <Property name="text" type="java.lang.String" value="Nombre completo"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="nombre" />
+                <Component class="javax.swing.JTextField" name="nombre">
+                </Component>
                 <Component class="javax.swing.JLabel" name="etiqueta3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Contraseña" />
+                    <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JPasswordField" name="contrasena" />
+                <Component class="javax.swing.JPasswordField" name="contrasena">
+                </Component>
                 <Component class="javax.swing.JLabel" name="etiqueta4">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Asignaturas que dicta" />
+                    <Property name="text" type="java.lang.String" value="Asignaturas que dicta"/>
                   </Properties>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="scrollAsignaturas">
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout" />
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextArea" name="asignaturas" />
+                    <Component class="javax.swing.JTextArea" name="asignaturas">
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JLabel" name="ayuda1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Al modificar: contraseña vacía = conservar la anterior" />
+                    <Property name="text" type="java.lang.String" value="Al modificar: contrase&#xf1;a vac&#xed;a = conservar la anterior"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="relleno1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value=" " />
+                    <Property name="text" type="java.lang.String" value=" "/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="ayuda2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Las asignaturas se administran en Gestión de asignaturas" />
+                    <Property name="text" type="java.lang.String" value="Las asignaturas se administran en Gesti&#xf3;n de asignaturas"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="relleno2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value=" " />
+                    <Property name="text" type="java.lang.String" value=" "/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -161,53 +176,67 @@
         <Container class="javax.swing.JPanel" name="pie">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-              <BorderConstraints direction="South" />
+              <BorderConstraints direction="South"/>
             </Constraint>
           </Constraints>
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" />
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
           <SubComponents>
             <Container class="javax.swing.JPanel" name="botonesPanel">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                  <BorderConstraints direction="North" />
+                  <BorderConstraints direction="North"/>
                 </Constraint>
               </Constraints>
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout" />
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JButton" name="nuevo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Nuevo / Limpiar" />
+                    <Property name="text" type="java.lang.String" value="Nuevo / Limpiar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevoActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="agregar">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Agregar" />
+                    <Property name="text" type="java.lang.String" value="Agregar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="agregarActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="modificar">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Modificar" />
+                    <Property name="text" type="java.lang.String" value="Modificar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="eliminar">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Eliminar" />
+                    <Property name="text" type="java.lang.String" value="Eliminar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eliminarActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="atras">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Atrás" />
+                    <Property name="text" type="java.lang.String" value="Atr&#xe1;s"/>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
             <Component class="javax.swing.JLabel" name="estado">
               <Properties>
-                <Property name="text" type="java.lang.String" value=" " />
+                <Property name="text" type="java.lang.String" value=" "/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                  <BorderConstraints direction="South" />
+                  <BorderConstraints direction="South"/>
                 </Constraint>
               </Constraints>
             </Component>

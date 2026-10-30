@@ -107,64 +107,129 @@ public class gestionarDocente extends javax.swing.JFrame {
         estado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
-        principal.setLayout(new java.awt.BorderLayout(8, 8));
-        encabezado.setLayout(new java.awt.BorderLayout(8, 8));
+
+        principal.setLayout(new java.awt.BorderLayout());
+
+        encabezado.setLayout(new java.awt.BorderLayout());
+
         etiquetaTitulo.setText("Gestionar docentes");
-        buscadorPanel.setLayout(new java.awt.BorderLayout(8, 8));
-        etiquetaBuscar.setText("Buscar por nombre o cédula:");
-        formulario.setLayout(new java.awt.GridLayout(6, 2, 7, 7));
-        etiqueta1.setText("Cédula");
-        etiqueta2.setText("Nombre completo");
-        etiqueta3.setText("Contraseña");
-        etiqueta4.setText("Asignaturas que dicta");
-        asignaturas.setRows(4);
-        asignaturas.setColumns(20);
-        ayuda1.setText("Al modificar: contraseña vacía = conservar la anterior");
-        relleno1.setText(" ");
-        ayuda2.setText("Las asignaturas se administran en Gestión de asignaturas");
-        relleno2.setText(" ");
-        pie.setLayout(new java.awt.BorderLayout(8, 8));
-        botonesPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 8, 4));
-        nuevo.setText("Nuevo / Limpiar");
-        agregar.setText("Agregar");
-        modificar.setText("Modificar");
-        eliminar.setText("Eliminar");
-        atras.setText("Atrás");
-        estado.setText(" ");
-        principal.add(encabezado, java.awt.BorderLayout.NORTH);
-        principal.add(dividido, java.awt.BorderLayout.CENTER);
-        principal.add(pie, java.awt.BorderLayout.SOUTH);
         encabezado.add(etiquetaTitulo, java.awt.BorderLayout.NORTH);
-        encabezado.add(buscadorPanel, java.awt.BorderLayout.SOUTH);
+
+        buscadorPanel.setLayout(new java.awt.BorderLayout());
+
+        etiquetaBuscar.setText("Buscar por nombre o cédula:");
         buscadorPanel.add(etiquetaBuscar, java.awt.BorderLayout.WEST);
         buscadorPanel.add(filtro, java.awt.BorderLayout.CENTER);
-        dividido.setLeftComponent(scrollTabla);
-        dividido.setRightComponent(formulario);
+
+        encabezado.add(buscadorPanel, java.awt.BorderLayout.SOUTH);
+
+        principal.add(encabezado, java.awt.BorderLayout.NORTH);
+
         scrollTabla.setViewportView(tabla);
+
+        dividido.setLeftComponent(scrollTabla);
+
+        formulario.setLayout(new java.awt.GridLayout(6, 2));
+
+        etiqueta1.setText("Cédula");
         formulario.add(etiqueta1);
         formulario.add(cedula);
+
+        etiqueta2.setText("Nombre completo");
         formulario.add(etiqueta2);
         formulario.add(nombre);
+
+        etiqueta3.setText("Contraseña");
         formulario.add(etiqueta3);
         formulario.add(contrasena);
+
+        etiqueta4.setText("Asignaturas que dicta");
         formulario.add(etiqueta4);
-        formulario.add(scrollAsignaturas);
-        formulario.add(ayuda1);
-        formulario.add(relleno1);
-        formulario.add(ayuda2);
-        formulario.add(relleno2);
+
         scrollAsignaturas.setViewportView(asignaturas);
-        pie.add(botonesPanel, java.awt.BorderLayout.NORTH);
-        pie.add(estado, java.awt.BorderLayout.SOUTH);
+
+        formulario.add(scrollAsignaturas);
+
+        ayuda1.setText("Al modificar: contraseña vacía = conservar la anterior");
+        formulario.add(ayuda1);
+
+        relleno1.setText(" ");
+        formulario.add(relleno1);
+
+        ayuda2.setText("Las asignaturas se administran en Gestión de asignaturas");
+        formulario.add(ayuda2);
+
+        relleno2.setText(" ");
+        formulario.add(relleno2);
+
+        dividido.setRightComponent(formulario);
+
+        principal.add(dividido, java.awt.BorderLayout.CENTER);
+
+        pie.setLayout(new java.awt.BorderLayout());
+
+        nuevo.setText("Nuevo / Limpiar");
+        nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoActionPerformed(evt);
+            }
+        });
         botonesPanel.add(nuevo);
+
+        agregar.setText("Agregar");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
         botonesPanel.add(agregar);
+
+        modificar.setText("Modificar");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
         botonesPanel.add(modificar);
+
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
         botonesPanel.add(eliminar);
+
+        atras.setText("Atrás");
         botonesPanel.add(atras);
+
+        pie.add(botonesPanel, java.awt.BorderLayout.NORTH);
+
+        estado.setText(" ");
+        pie.add(estado, java.awt.BorderLayout.SOUTH);
+
+        principal.add(pie, java.awt.BorderLayout.SOUTH);
+
         getContentPane().add(principal, java.awt.BorderLayout.CENTER);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nuevoActionPerformed
+
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarActionPerformed
+
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modificarActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarActionPerformed
 
 
     private void configurarComponentes() {

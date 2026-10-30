@@ -58,7 +58,7 @@ public class generarInformeAdmin extends javax.swing.JFrame {
         titulo = new javax.swing.JLabel();
         barraSeleccion = new javax.swing.JPanel();
         etiquetaTipo = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<>();
+        comboTipo = new javax.swing.JComboBox();
         botonGenerar = new javax.swing.JButton();
         panelBusqueda = new javax.swing.JPanel();
         etiquetaBuscar = new javax.swing.JLabel();
@@ -73,47 +73,96 @@ public class generarInformeAdmin extends javax.swing.JFrame {
         etiquetaEstado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        panelPrincipal.setLayout(new java.awt.BorderLayout(0, 12));
-        panelSuperior.setLayout(new java.awt.BorderLayout(0, 7));
-        titulo.setFont(new java.awt.Font("Dialog", 1, 18));
+
+        panelPrincipal.setLayout(new java.awt.BorderLayout());
+
+        panelSuperior.setLayout(new java.awt.BorderLayout());
+
+        titulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         titulo.setText("Informes generales de administración");
         panelSuperior.add(titulo, java.awt.BorderLayout.NORTH);
-        barraSeleccion.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 4));
+
         etiquetaTipo.setText("Tipo de informe:");
         barraSeleccion.add(etiquetaTipo);
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
-            "Estudiantes", "Docentes", "Asignaturas", "Inscripciones", "Calificaciones", "Informes académicos"
-        }));
         barraSeleccion.add(comboTipo);
+
         botonGenerar.setText("Generar / actualizar");
+        botonGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGenerarActionPerformed(evt);
+            }
+        });
         barraSeleccion.add(botonGenerar);
+
         panelSuperior.add(barraSeleccion, java.awt.BorderLayout.CENTER);
-        panelBusqueda.setLayout(new java.awt.BorderLayout(10, 0));
+
+        panelBusqueda.setLayout(new java.awt.BorderLayout());
+
         etiquetaBuscar.setText("Buscar en el informe:");
         panelBusqueda.add(etiquetaBuscar, java.awt.BorderLayout.WEST);
         panelBusqueda.add(campoBuscar, java.awt.BorderLayout.CENTER);
+
         panelSuperior.add(panelBusqueda, java.awt.BorderLayout.SOUTH);
+
         panelPrincipal.add(panelSuperior, java.awt.BorderLayout.NORTH);
 
-        tabla.setModel(new javax.swing.table.DefaultTableModel());
         scrollTabla.setViewportView(tabla);
+
         panelPrincipal.add(scrollTabla, java.awt.BorderLayout.CENTER);
 
-        panelInferior.setLayout(new java.awt.BorderLayout(0, 8));
-        panelBotones.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 12, 3));
+        panelInferior.setLayout(new java.awt.BorderLayout());
+
         botonExportar.setText("Exportar CSV");
+        botonExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonExportarActionPerformed(evt);
+            }
+        });
         panelBotones.add(botonExportar);
+
         botonImprimir.setText("Imprimir");
+        botonImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonImprimirActionPerformed(evt);
+            }
+        });
         panelBotones.add(botonImprimir);
+
         botonVolver.setText("Volver al menú");
+        botonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVolverActionPerformed(evt);
+            }
+        });
         panelBotones.add(botonVolver);
+
         panelInferior.add(panelBotones, java.awt.BorderLayout.NORTH);
+
         etiquetaEstado.setText(" ");
         panelInferior.add(etiquetaEstado, java.awt.BorderLayout.SOUTH);
+
         panelPrincipal.add(panelInferior, java.awt.BorderLayout.SOUTH);
+
         getContentPane().add(panelPrincipal, java.awt.BorderLayout.CENTER);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExportarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonExportarActionPerformed
+
+    private void botonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonImprimirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonImprimirActionPerformed
+
+    private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonVolverActionPerformed
+
+    private void botonGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonGenerarActionPerformed
 
     private void prepararVista() {
         panelPrincipal.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
@@ -268,23 +317,23 @@ public class generarInformeAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel panelPrincipal;
-    private javax.swing.JPanel panelSuperior;
-    private javax.swing.JLabel titulo;
     private javax.swing.JPanel barraSeleccion;
-    private javax.swing.JLabel etiquetaTipo;
-    private javax.swing.JComboBox<String> comboTipo;
-    private javax.swing.JButton botonGenerar;
-    private javax.swing.JPanel panelBusqueda;
-    private javax.swing.JLabel etiquetaBuscar;
-    private javax.swing.JTextField campoBuscar;
-    private javax.swing.JScrollPane scrollTabla;
-    private javax.swing.JTable tabla;
-    private javax.swing.JPanel panelInferior;
-    private javax.swing.JPanel panelBotones;
     private javax.swing.JButton botonExportar;
+    private javax.swing.JButton botonGenerar;
     private javax.swing.JButton botonImprimir;
     private javax.swing.JButton botonVolver;
+    private javax.swing.JTextField campoBuscar;
+    private javax.swing.JComboBox comboTipo;
+    private javax.swing.JLabel etiquetaBuscar;
     private javax.swing.JLabel etiquetaEstado;
+    private javax.swing.JLabel etiquetaTipo;
+    private javax.swing.JPanel panelBotones;
+    private javax.swing.JPanel panelBusqueda;
+    private javax.swing.JPanel panelInferior;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelSuperior;
+    private javax.swing.JScrollPane scrollTabla;
+    private javax.swing.JTable tabla;
+    private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

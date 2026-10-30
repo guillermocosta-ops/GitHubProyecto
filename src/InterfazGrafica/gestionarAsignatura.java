@@ -95,66 +95,154 @@ public class gestionarAsignatura extends javax.swing.JFrame {
         desasignar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
-        principal.setLayout(new java.awt.BorderLayout(8, 8));
-        superior.setLayout(new java.awt.BorderLayout(8, 8));
-        encabezado.setLayout(new java.awt.BorderLayout(8, 8));
+
+        principal.setLayout(new java.awt.BorderLayout());
+
+        superior.setLayout(new java.awt.BorderLayout());
+
+        encabezado.setLayout(new java.awt.BorderLayout());
+
         etiquetaTitulo.setText("Gestionar asignaturas");
-        buscadorPanel.setLayout(new java.awt.BorderLayout(8, 8));
-        etiquetaBuscar.setText("Buscar por nombre o ID:");
-        pie.setLayout(new java.awt.BorderLayout(8, 8));
-        botonesPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 8, 4));
-        nuevo.setText("Nuevo / Limpiar");
-        agregar.setText("Agregar");
-        modificar.setText("Modificar");
-        eliminar.setText("Eliminar");
-        atras.setText("Atrás");
-        estado.setText(" ");
-        formulario.setLayout(new java.awt.GridLayout(4, 2, 7, 7));
-        etiqueta1.setText("ID:");
-        idActual.setText("Automático");
-        etiqueta2.setText("Nombre:");
-        etiqueta3.setText("Créditos:");
-        etiqueta4.setText("Cupo máximo:");
-        docentesPanel.setLayout(new java.awt.BorderLayout(8, 8));
-        accionesDocentes.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 8, 4));
-        asignar.setText("Asignar docente");
-        desasignar.setText("Quitar docente seleccionado");
-        principal.add(superior, java.awt.BorderLayout.NORTH);
-        principal.add(dividido, java.awt.BorderLayout.CENTER);
-        principal.add(docentesPanel, java.awt.BorderLayout.SOUTH);
-        superior.add(encabezado, java.awt.BorderLayout.CENTER);
-        superior.add(pie, java.awt.BorderLayout.SOUTH);
         encabezado.add(etiquetaTitulo, java.awt.BorderLayout.NORTH);
-        encabezado.add(buscadorPanel, java.awt.BorderLayout.SOUTH);
+
+        buscadorPanel.setLayout(new java.awt.BorderLayout());
+
+        etiquetaBuscar.setText("Buscar por nombre o ID:");
         buscadorPanel.add(etiquetaBuscar, java.awt.BorderLayout.WEST);
         buscadorPanel.add(filtro, java.awt.BorderLayout.CENTER);
-        pie.add(botonesPanel, java.awt.BorderLayout.NORTH);
-        pie.add(estado, java.awt.BorderLayout.SOUTH);
+
+        encabezado.add(buscadorPanel, java.awt.BorderLayout.SOUTH);
+
+        superior.add(encabezado, java.awt.BorderLayout.CENTER);
+
+        pie.setLayout(new java.awt.BorderLayout());
+
+        nuevo.setText("Nuevo / Limpiar");
+        nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoActionPerformed(evt);
+            }
+        });
         botonesPanel.add(nuevo);
+
+        agregar.setText("Agregar");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
         botonesPanel.add(agregar);
+
+        modificar.setText("Modificar");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
         botonesPanel.add(modificar);
+
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
         botonesPanel.add(eliminar);
+
+        atras.setText("Atrás");
         botonesPanel.add(atras);
-        dividido.setLeftComponent(scrollTabla);
-        dividido.setRightComponent(formulario);
+
+        pie.add(botonesPanel, java.awt.BorderLayout.NORTH);
+
+        estado.setText(" ");
+        pie.add(estado, java.awt.BorderLayout.SOUTH);
+
+        superior.add(pie, java.awt.BorderLayout.SOUTH);
+
+        principal.add(superior, java.awt.BorderLayout.NORTH);
+
         scrollTabla.setViewportView(tabla);
+
+        dividido.setLeftComponent(scrollTabla);
+
+        formulario.setLayout(new java.awt.GridLayout(4, 2));
+
+        etiqueta1.setText("ID:");
         formulario.add(etiqueta1);
+
+        idActual.setText("Automático");
         formulario.add(idActual);
+
+        etiqueta2.setText("Nombre:");
         formulario.add(etiqueta2);
         formulario.add(nombre);
+
+        etiqueta3.setText("Créditos:");
         formulario.add(etiqueta3);
         formulario.add(creditos);
+
+        etiqueta4.setText("Cupo máximo:");
         formulario.add(etiqueta4);
         formulario.add(cupo);
-        docentesPanel.add(scrollDocentes, java.awt.BorderLayout.CENTER);
-        docentesPanel.add(accionesDocentes, java.awt.BorderLayout.SOUTH);
+
+        dividido.setRightComponent(formulario);
+
+        principal.add(dividido, java.awt.BorderLayout.CENTER);
+
+        docentesPanel.setLayout(new java.awt.BorderLayout());
+
         scrollDocentes.setViewportView(tablaDocentes);
+
+        docentesPanel.add(scrollDocentes, java.awt.BorderLayout.CENTER);
+
+        asignar.setText("Asignar docente");
+        asignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asignarActionPerformed(evt);
+            }
+        });
         accionesDocentes.add(asignar);
+
+        desasignar.setText("Quitar docente seleccionado");
+        desasignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desasignarActionPerformed(evt);
+            }
+        });
         accionesDocentes.add(desasignar);
+
+        docentesPanel.add(accionesDocentes, java.awt.BorderLayout.SOUTH);
+
+        principal.add(docentesPanel, java.awt.BorderLayout.SOUTH);
+
         getContentPane().add(principal, java.awt.BorderLayout.CENTER);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void asignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_asignarActionPerformed
+
+    private void desasignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desasignarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_desasignarActionPerformed
+
+    private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nuevoActionPerformed
+
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarActionPerformed
+
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modificarActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarActionPerformed
 
 
     private void configurarComponentes() {

@@ -51,27 +51,48 @@ public class verNotasEstudiante extends JDialog {
         cerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
-        principal.setLayout(new java.awt.BorderLayout(8, 8));
-        superior.setLayout(new java.awt.BorderLayout(8, 8));
+
+        principal.setLayout(new java.awt.BorderLayout());
+
+        superior.setLayout(new java.awt.BorderLayout());
+
         etiquetaTitulo.setText("Mis calificaciones");
-        etiquetaAlumno.setText(" ");
-        inferior.setLayout(new java.awt.BorderLayout(8, 8));
-        estado.setText(" ");
-        derecha.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 8, 4));
-        cerrar.setText("Cerrar");
-        principal.add(superior, java.awt.BorderLayout.NORTH);
-        principal.add(scrollTabla, java.awt.BorderLayout.CENTER);
-        principal.add(inferior, java.awt.BorderLayout.SOUTH);
         superior.add(etiquetaTitulo, java.awt.BorderLayout.NORTH);
+
+        etiquetaAlumno.setText(" ");
         superior.add(etiquetaAlumno, java.awt.BorderLayout.SOUTH);
+
+        principal.add(superior, java.awt.BorderLayout.NORTH);
+
         scrollTabla.setViewportView(tabla);
+
+        principal.add(scrollTabla, java.awt.BorderLayout.CENTER);
+
+        inferior.setLayout(new java.awt.BorderLayout());
+
+        estado.setText(" ");
         inferior.add(estado, java.awt.BorderLayout.CENTER);
-        inferior.add(derecha, java.awt.BorderLayout.EAST);
+
+        cerrar.setText("Cerrar");
+        cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarActionPerformed(evt);
+            }
+        });
         derecha.add(cerrar);
+
+        inferior.add(derecha, java.awt.BorderLayout.EAST);
+
+        principal.add(inferior, java.awt.BorderLayout.SOUTH);
+
         getContentPane().add(principal, java.awt.BorderLayout.CENTER);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cerrarActionPerformed
 
     private void configurarComponentes() {
 
