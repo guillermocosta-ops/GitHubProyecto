@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfazGrafica;
-
+//FALTA
 /**
  *
  * @author guill
@@ -16,24 +16,7 @@ public class interfazAdmin extends javax.swing.JFrame {
     public interfazAdmin() {
         initComponents();
         setLocationRelativeTo(null);
-        // Se conecta fuera de initComponents() para conservar el .form.
-        jButton2.addActionListener(evt -> {
-            new gestionarEstudiante().setVisible(true);
-            dispose();
-        });
-        jButton4.addActionListener(evt -> {
-            new gestionarAsignatura().setVisible(true);
-            dispose();
-        });
-        jButton8.addActionListener(evt -> {
-            new gestionarInscripcion().setVisible(true);
-            dispose();
-        });
-        // El botón ya existe en el diseñador NetBeans; solo agregamos su acción.
-        jButton6.addActionListener(evt -> {
-            new generarInformeAdmin().setVisible(true);
-            dispose();
-        });
+        
     }
 
     /**
@@ -54,6 +37,11 @@ public class interfazAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton2.setText("Gestionar estudiante");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Gestionar docente");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -63,10 +51,25 @@ public class interfazAdmin extends javax.swing.JFrame {
         });
 
         jButton4.setText("Gestionar asignatura");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Generar informe");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Gestionar inscripciones");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,6 +108,26 @@ public class interfazAdmin extends javax.swing.JFrame {
         new gestionarDocente().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      new gestionarEstudiante().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       new gestionarAsignatura().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+     new informe().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+       new gestionarInscripcion().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,5 +1,5 @@
 package InterfazGrafica;
-
+//FALTA
 import Logica.Asignatura;
 import Logica.Admin;
 import Logica.Admins;
@@ -120,9 +120,19 @@ public class gestionarInscripcion extends javax.swing.JFrame {
         botonesPanel.add(desinscribir);
 
         actualizar.setText("Actualizar tabla");
+        actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarActionPerformed(evt);
+            }
+        });
         botonesPanel.add(actualizar);
 
         atras.setText("Atrás");
+        atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atrasActionPerformed(evt);
+            }
+        });
         botonesPanel.add(atras);
 
         inferior.add(botonesPanel, java.awt.BorderLayout.NORTH);
@@ -138,12 +148,20 @@ public class gestionarInscripcion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void inscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscribirActionPerformed
-        // TODO add your handling code here:
+      solicitarInscripcion();
     }//GEN-LAST:event_inscribirActionPerformed
 
     private void desinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desinscribirActionPerformed
-        // TODO add your handling code here:
+quitarInscripcionSeleccionada();
     }//GEN-LAST:event_desinscribirActionPerformed
+
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
+        volver();
+    }//GEN-LAST:event_atrasActionPerformed
+
+    private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
+      cargarTabla();
+    }//GEN-LAST:event_actualizarActionPerformed
 
 
     private void configurarComponentes() {

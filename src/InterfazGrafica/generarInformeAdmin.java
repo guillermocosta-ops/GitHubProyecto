@@ -149,19 +149,19 @@ public class generarInformeAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExportarActionPerformed
-        // TODO add your handling code here:
+       exportarCsv();
     }//GEN-LAST:event_botonExportarActionPerformed
 
     private void botonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonImprimirActionPerformed
-        // TODO add your handling code here:
+  imprimir();
     }//GEN-LAST:event_botonImprimirActionPerformed
 
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
-        // TODO add your handling code here:
+dispose();     
     }//GEN-LAST:event_botonVolverActionPerformed
 
     private void botonGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarActionPerformed
-        // TODO add your handling code here:
+generarInforme();
     }//GEN-LAST:event_botonGenerarActionPerformed
 
     private void prepararVista() {
@@ -172,14 +172,8 @@ public class generarInformeAdmin extends javax.swing.JFrame {
         tabla.setFont(new Font("Dialog", Font.PLAIN, 12));
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        botonGenerar.addActionListener(evt -> generarInforme());
-        comboTipo.addActionListener(evt -> generarInforme());
-        botonExportar.addActionListener(evt -> exportarCsv());
-        botonImprimir.addActionListener(evt -> imprimir());
-        botonVolver.addActionListener(evt -> {
-            new interfazAdmin().setVisible(true);
-            dispose();
-        });
+       
+    
         campoBuscar.getDocument().addDocumentListener(new DocumentListener() {
             @Override public void insertUpdate(DocumentEvent evt) { aplicarFiltro(); }
             @Override public void removeUpdate(DocumentEvent evt) { aplicarFiltro(); }

@@ -1,5 +1,5 @@
 package InterfazGrafica;
-
+//FALTA
 import Logica.Asignatura;
 import Logica.Estudiante;
 import Logica.Estudiantes;
@@ -20,7 +20,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-/** Ventana de solo lectura. No necesita un archivo .form. */
+
 public class verNotasEstudiante extends JDialog {
 
     private Estudiante control() {
@@ -91,7 +91,7 @@ public class verNotasEstudiante extends JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
-        // TODO add your handling code here:
+      dispose();
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void configurarComponentes() {
@@ -107,7 +107,7 @@ public class verNotasEstudiante extends JDialog {
         tabla.setRowHeight(27);
         tabla.setAutoCreateRowSorter(true);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        cerrar.addActionListener(e -> dispose());
+       
 
     }
 

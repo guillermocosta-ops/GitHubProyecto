@@ -201,6 +201,11 @@ public class gestionarDocente extends javax.swing.JFrame {
         botonesPanel.add(eliminar);
 
         atras.setText("Atrás");
+        atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atrasActionPerformed(evt);
+            }
+        });
         botonesPanel.add(atras);
 
         pie.add(botonesPanel, java.awt.BorderLayout.NORTH);
@@ -216,20 +221,24 @@ public class gestionarDocente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
-        // TODO add your handling code here:
+       limpiar();
     }//GEN-LAST:event_nuevoActionPerformed
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        // TODO add your handling code here:
+       agregar();
     }//GEN-LAST:event_agregarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        // TODO add your handling code here:
+      modificar();
     }//GEN-LAST:event_modificarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
+       eliminar();
     }//GEN-LAST:event_eliminarActionPerformed
+
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
+        volver();
+    }//GEN-LAST:event_atrasActionPerformed
 
 
     private void configurarComponentes() {
@@ -255,10 +264,7 @@ public class gestionarDocente extends javax.swing.JFrame {
         principal.setBorder(BorderFactory.createEmptyBorder(14,14,14,14));
         dividido.setResizeWeight(0.54);
         dividido.setDividerLocation(520);
-        nuevo.addActionListener(e -> limpiar());
-        agregar.addActionListener(e -> agregar());
-        modificar.addActionListener(e -> modificar());
-        eliminar.addActionListener(e -> eliminar());
+        
         atras.addActionListener(e -> volver());
         filtro.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) { actualizarTabla(); }

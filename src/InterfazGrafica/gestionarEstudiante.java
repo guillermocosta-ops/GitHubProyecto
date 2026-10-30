@@ -1,6 +1,6 @@
 package InterfazGrafica;
 import Logica.Estudiantes;
-
+//FALTA
 import Logica.Admin;
 import Logica.Admins;
 import Logica.Estudiante;
@@ -197,9 +197,19 @@ public class gestionarEstudiante extends JFrame {
         botonesPanel.add(eliminar);
 
         inscribir.setText("Inscribir en asignatura");
+        inscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inscribirActionPerformed(evt);
+            }
+        });
         botonesPanel.add(inscribir);
 
         atras.setText("Atrás");
+        atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atrasActionPerformed(evt);
+            }
+        });
         botonesPanel.add(atras);
 
         zonaInferior.add(botonesPanel, java.awt.BorderLayout.NORTH);
@@ -215,20 +225,28 @@ public class gestionarEstudiante extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
-        // TODO add your handling code here:
+limpiar();
     }//GEN-LAST:event_nuevoActionPerformed
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        // TODO add your handling code here:
+agregar();
     }//GEN-LAST:event_agregarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        // TODO add your handling code here:
+        modificar();
     }//GEN-LAST:event_modificarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
+    eliminar();
     }//GEN-LAST:event_eliminarActionPerformed
+
+    private void inscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscribirActionPerformed
+      inscribir();
+    }//GEN-LAST:event_inscribirActionPerformed
+
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
+       volver();
+    }//GEN-LAST:event_atrasActionPerformed
 
 
     private void configurarComponentes() {
@@ -252,12 +270,7 @@ public class gestionarEstudiante extends JFrame {
         principal.setBorder(BorderFactory.createEmptyBorder(14,14,14,14));
         dividido.setResizeWeight(0.55);
         dividido.setDividerLocation(520);
-        nuevo.addActionListener(e -> limpiar());
-        agregar.addActionListener(e -> agregar());
-        modificar.addActionListener(e -> modificar());
-        eliminar.addActionListener(e -> eliminar());
-        inscribir.addActionListener(e -> inscribir());
-        atras.addActionListener(e -> volver());
+       
         buscar.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) { actualizarTabla(); }
             public void removeUpdate(DocumentEvent e) { actualizarTabla(); }
