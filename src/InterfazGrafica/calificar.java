@@ -20,7 +20,7 @@ public class calificar extends javax.swing.JFrame {
         return Docentes.getInstancia().obtenerSesionActual();
     }
 
-    public calificar() {
+    public calificar() {//constructor de calificar
         initComponents();
         setLocationRelativeTo(null);
         seleccionarAsignatura();
@@ -48,7 +48,7 @@ public class calificar extends javax.swing.JFrame {
         }
     }
 
-    private void cargarEstudiantes() {
+    private void cargarEstudiantes() { //carga nombres  y cedula y lo pone en la tabla
         DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Cédula", "Nombre"}, 0) {
             @Override public boolean isCellEditable(int fila, int columna) { return false; }
         };
@@ -173,6 +173,7 @@ public class calificar extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    //Boton para volver al menu
     interfazDocente ventana = new interfazDocente();
     ventana.setLocationRelativeTo(this);
     ventana.setVisible(true);
@@ -180,6 +181,8 @@ public class calificar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+//boton agregar 
+        // para los errores
         try {
             if (idAsignatura == 0) throw new IllegalArgumentException("Seleccione una asignatura");
             int fila = jTable1.getSelectedRow();
@@ -191,11 +194,12 @@ public class calificar extends javax.swing.JFrame {
                     : jRadioButton4.isSelected() ? "Escrito" : "";
             if (tipo.isEmpty()) throw new IllegalArgumentException("Seleccione el tipo de evaluación");
             int nota = Integer.parseInt(jTextField1.getText().trim());
-            control().ingresarDatosNota(ci, idAsignatura, tipo, nota);
+            control().ingresarDatosNota(ci, idAsignatura, tipo, nota); //ingresa nota a la base de datos
             JOptionPane.showMessageDialog(this, "Calificación guardada correctamente");
             jTextField1.setText("");
             buttonGroup4.clearSelection();
-            cargarEstudiantes();
+            cargarEstudiantes(); //actualiza
+            //mas manejo de errores
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Ingrese una nota numérica válida");
         } catch (RuntimeException ex) {
